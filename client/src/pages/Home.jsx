@@ -50,15 +50,10 @@ function Home() {
               transition={{ duration: 0.6 }}
               className='text-4xl md:text-6xl font-semibold leading-tight max-w-4xl mx-auto'>
               Practice Interviews with
-              <span className='relative inline-block'>
-                <span className='bg-green-100 text-green-600 px-5 py-1 rounded-full'>
-                  AI Intelligence
-
-                </span>
+              <br />
+              <span className='bg-green-100 text-green-600 px-5 py-1 rounded-full inline-block mt-2'>
+                AI Intelligence
               </span>
-
-
-
             </motion.h1>
 
             <motion.p
