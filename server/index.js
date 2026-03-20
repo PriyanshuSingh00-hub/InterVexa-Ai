@@ -15,6 +15,13 @@ app.use(cors({
   credentials: true
 }))
 
+// Add COOP headers for Firebase popups
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups")
+  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp")
+  next()
+})
+
 app.use(express.json())
 app.use(cookieParser())
 
@@ -27,7 +34,7 @@ app.get("/", (req, res) => {
   res.send("API is running 🚀")
 })
 
-const PORT = process.env.PORT || 6000
+const PORT = process.env.PORT || 8000
 
 connectDb()
 
