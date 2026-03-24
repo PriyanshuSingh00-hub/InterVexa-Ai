@@ -3,15 +3,22 @@ import { BsRobot } from "react-icons/bs";
 import { IoSparkles } from "react-icons/io5";
 import { motion } from "motion/react"
 import { FcGoogle } from "react-icons/fc";
-import { signInWithPopup } from 'firebase/auth';
+import { linkWithCredential, signInWithPopup } from 'firebase/auth';
 import { provider,auth } from '../utils/firebase';
+import { ServerUrl } from '../App';
+import axios from "axios";
 
 function Auth() {
 
     const handleGoogleAuth = async () => {
         try {
             const response = await signInWithPopup(auth,provider)
-            console.log(response)
+            let User =response.user 
+            let name = User.displayName
+            let email = User.email 
+            const result = await axios.post(ServerUrl+"/api/auth/google" ,
+              {email , name},{withCredentials:true})
+              console.log(result.data)
         } catch (error) {
             console.log(error)
             
@@ -30,7 +37,7 @@ function Auth() {
           <div className='bg-black text-white p-2 rounded-lg'>
             <BsRobot size={18}/>
           </div>
-          <h2 className='font-semibold text-lg'>InterviewIQ.AI</h2>
+          <h2 className='font-semibold text-lg'>InterVexa.AI</h2>
         </div>
 
         <h1 className='text-2xl md:text-3xl font-semibold text-center leading-snug mb-4'>
