@@ -33,7 +33,7 @@ function App() {
       <Route path = "/auth" element={<Auth/>}/>
       <Route path = "/interview" element={<InterviewPage/>}/>
       <Route path = "/history" element={<InterviewHistory/>}/>
-      <Route path = "/report:id" element={<InterviewReport/>}/>
+      <Route path="/report/:id" element={<InterviewReport />} />
       <Route path = "/pricing" element={<Pricing/>}/>
 
 
