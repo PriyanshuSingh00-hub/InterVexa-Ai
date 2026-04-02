@@ -49,7 +49,13 @@ function Step1SetUp({ onStart }) {
             setAnalyzing(false);
 
         } catch (error) {
-            console.log(error)
+            const errorMsg = error.response?.data?.message || error.message || "Failed to upload resume";
+            console.error("Resume upload error:", {
+                message: errorMsg,
+                status: error.response?.status,
+                errorType: error.response?.data?.errorType
+            });
+            alert("Error: " + errorMsg);
             setAnalyzing(false);
         }
     }

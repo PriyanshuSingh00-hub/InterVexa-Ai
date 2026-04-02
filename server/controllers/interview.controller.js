@@ -1,8 +1,16 @@
 import fs from "fs"
+import path from "path";
+import { fileURLToPath, pathToFileURL } from "url";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import { askAi } from "../services/openRouter.service.js";
 import User from "../models/user.model.js";
 import Interview from "../models/interview.model.js";
+
+// Configure PDF.js worker with proper file:// URL
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const workerPath = path.join(__dirname, '../node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs');
+const workerUrl = pathToFileURL(workerPath).href;
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 export const analyzeResume = async (req, res) => {
   try {
@@ -57,7 +65,16 @@ Return strictly JSON:
 
     const aiResponse = await askAi(messages)
 
-    const parsed = JSON.parse(aiResponse);
+    // Clean markdown code blocks from AI response
+    let jsonString = aiResponse.trim();
+    if (jsonString.startsWith("```")) {
+      // Remove opening ```json or ```
+      jsonString = jsonString.replace(/^```(?:json)?\n?/, "");
+      // Remove closing ```
+      jsonString = jsonString.replace(/\n?```$/, "");
+    }
+
+    const parsed = JSON.parse(jsonString);
 
     fs.unlinkSync(filepath)
 
@@ -71,13 +88,16 @@ Return strictly JSON:
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Resume Analysis Error:", error.message || error);
 
     if (req.file && fs.existsSync(req.file.path)) {
       fs.unlinkSync(req.file.path);
     }
 
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ 
+      message: error.message || "Failed to analyze resume",
+      errorType: error.constructor.name 
+    });
   }
 };
 

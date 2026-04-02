@@ -25,8 +25,20 @@ export const askAi = async (messages) => {
 
     return content
     } catch (error) {
-            console.error("OpenRouter Error:", error.response?.data || error.message);
-    throw new Error("OpenRouter API Error");
-
+        console.error("OpenRouter Error:", error.response?.data || error.message);
+        
+        // Better error messages
+        let errorMsg = "OpenRouter API Error";
+        if (error.response?.data?.error?.message) {
+            errorMsg = error.response.data.error.message;
+        } else if (error.response?.status === 401) {
+            errorMsg = "Invalid OpenRouter API Key";
+        } else if (error.response?.status === 429) {
+            errorMsg = "Rate limited - try again later";
+        } else if (error.message) {
+            errorMsg = error.message;
+        }
+        
+        throw new Error(errorMsg);
     }
 }
