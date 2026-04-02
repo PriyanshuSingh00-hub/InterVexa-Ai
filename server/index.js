@@ -1,35 +1,61 @@
-import express from "express"
-import dotenv from "dotenv"
+import express from "express";
+import dotenv from "dotenv";
 import connectDb from "./config/connectDB.js";
 import cookieParser from "cookie-parser";
-import cors from "cors"
+import cors from "cors";
+
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import interviewRouter from "./routes/interview.route.js";
 import paymentRouter from "./routes/payment.route.js";
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+const app = express();
 
 
-
+// ✅ CORS (IMPORTANT for deployment)
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173", // local frontend
+    "https://your-frontend.vercel.app" // 🔁 replace later
+  ],
   credentials: true
-}))
+}));
 
-app.use(express.json())
-app.use(cookieParser())
 
-app.use("/api/auth", authRouter)
-app.use("/api/user",userRouter)
-app.use("/api/interview",interviewRouter)
-app.use("/api/payment",paymentRouter)
+// ✅ Middleware
+app.use(express.json());
+app.use(cookieParser());
 
+
+// ✅ Health check route (very useful)
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+
+// ✅ Routes
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+app.use("/api/interview", interviewRouter);
+app.use("/api/payment", paymentRouter);
+
+
+// ✅ Port (Render will override)
 const PORT = process.env.PORT || 6000;
 
-app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`)
-  connectDb()
-})
+
+// ✅ Start server AFTER DB connects
+const startServer = async () => {
+  try {
+    await connectDb();
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Server failed to start:", error);
+  }
+};
+
+startServer();
