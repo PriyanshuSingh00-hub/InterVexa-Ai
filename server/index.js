@@ -16,13 +16,19 @@ const app = express();
 
 // ✅ CORS (IMPORTANT for deployment)
 app.use(cors({
-  origin: [
-    "http://localhost:5173", // local frontend
-    "https://your-frontend.vercel.app" // 🔁 replace later
-  ],
+  origin: function(origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://inter-vexa-ai.vercel.app"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
-
 
 // ✅ Middleware
 app.use(express.json());
