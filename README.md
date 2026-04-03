@@ -350,4 +350,4 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ as a personal project**
+**Made with ❤️**
