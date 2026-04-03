@@ -17,9 +17,9 @@ export const analyzeResume = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: "Resume required" });
     }
-    const filepath = req.file.path
 
-    const fileBuffer = await fs.promises.readFile(filepath)
+    // Use buffer directly (multer memory storage)
+    const fileBuffer = req.file.buffer;
     const uint8Array = new Uint8Array(fileBuffer)
 
     const pdf = await pdfjsLib.getDocument({ data: uint8Array }).promise;
@@ -76,8 +76,7 @@ Return strictly JSON:
 
     const parsed = JSON.parse(jsonString);
 
-    fs.unlinkSync(filepath)
-
+    // No need to delete - using memory storage
 
     res.json({
       role: parsed.role,
@@ -89,10 +88,6 @@ Return strictly JSON:
 
   } catch (error) {
     console.error("Resume Analysis Error:", error.message || error);
-
-    if (req.file && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
-    }
 
     return res.status(500).json({ 
       message: error.message || "Failed to analyze resume",

@@ -1,20 +1,7 @@
 import multer from "multer";
-import path from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const uploadDir = path.join(__dirname, '../public');
-
-const storage = multer.diskStorage({
-    destination: function(req, file , cb){
-        cb(null , uploadDir)
-    },
-    filename: function(req , file , cb){
-        const filename = Date.now() + "-" + file.originalname;
-        cb(null , filename)
-    }
-})
-
+// Use memory storage instead of disk (for Render compatibility)
+const storage = multer.memoryStorage();
 
 export const upload = multer({
     storage,
