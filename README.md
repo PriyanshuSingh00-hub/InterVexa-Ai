@@ -12,7 +12,7 @@
 
 ## 🎯 Overview
 
-**InterVexa AI** is a cutting-edge interview preparation platform that leverages artificial intelligence to help candidates practice and master their interview skills. Get real-time feedback, detailed analytics, and personalized insights to boost your confidence and performance.
+**InterVexa AI** is a cutting-edge interview preparation platform that leverages artificial intelligence to help candidates practice and master their interview skills. Get real-time feedback, detailed analytics,and personalized insights to boost your confidence and performance.
 
 ### Key Highlights
 ✨ **AI-Powered Interviews** - Intelligent interview simulations for HR, Technical, and more  
