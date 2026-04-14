@@ -1,6 +1,6 @@
 # InterVexa AI 🚀
 
-> **AI-Powered Smart Interview Platform** - Master your interview skills with intelligent feedback and real-time analysis
+> **AI-Powered Smart Interview Platform** - Master your interview skills with intelligent feedback and real-time analysis.
 
 [![React](https://img.shields.io/badge/React-19.2-blue?logo=react)](https://react.dev)
 [![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)](https://expressjs.com)
@@ -21,7 +21,7 @@
 💳 **Secure Payments** - Integrated Razorpay for seamless transactions  
 🔐 **Firebase Auth** - Secure and scalable authentication  
 ⚡ **Real-time Feedback** - Instant AI analysis of your responses  
-♻️ **Interview History** - Access all your past interviews anytime  
+♻️ **Interview History** - Access all your past interviews anytime.  
 
 ---
 
