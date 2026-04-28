@@ -39,8 +39,8 @@
 - **Axios** - HTTP client
 
 ### Backend
-- **Node.js + Express** - Fast and scalable server
-- **MongoDB + Mongoose** - Flexible database with ODM
+- **Node.js + Express** - Fast and scalable server.
+- **MongoDB + Mongoose** - Flexible database with ODM.
 - **JWT** - Secure token-based authentication
 - **Razorpay** - Payment gateway integration
 - **Multer** - File upload handling
