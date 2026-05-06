@@ -18,7 +18,7 @@
 ✨ **AI-Powered Interviews** - Intelligent interview simulations for HR, Technical, and more  
 📊 **Advanced Analytics** - Track your progress with detailed performance metrics  
 📄 **Auto-Generated Reports** - Professional PDF reports with actionable feedback  
-💳 **Secure Payments** - Integrated Razorpay for seamless transactions  
+💳 **Secure Payments** - Integrated Razorpay for seamless transactions. 
 🔐 **Firebase Auth** - Secure and scalable authentication. 
 ⚡ **Real-time Feedback** - Instant AI analysis of your responses .
 ♻️ **Interview History** - Access all your past interviews anytime.  
